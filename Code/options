@@ -1,0 +1,77 @@
+local composer = require("composer")
+local scene = composer.newScene()
+local widget = require("widget")
+
+local function handleGoButtonEvent(event)
+    if ("ended" == event.phase) then
+        composer.removeScene("tutorial2",false)
+        composer.gotoScene("go", {effect = "crossFade", time = 500})
+    end
+end
+
+--
+-- Start the composer event handlers
+--
+function scene:create(event)
+	local sceneGroup = self.view
+
+    local mbgImage = {type="image", filename="Background_brighter.png"} 
+    local mbackground = display.newRect(0,0,display.contentWidth,display.actualContentHeight)
+    mbackground.x = display.contentCenterX
+    mbackground.y = display.contentCenterY
+    mbackground.fill = mbgImage
+    sceneGroup:insert(mbackground)
+    mbackground:toBack()
+
+
+    local myText = display.newText({
+        text = "You are the predator.\nEat the animals on screen before the timer ends.", 
+        x = display.contentCenterX, 
+        y = display.contentCenterY-display.actualContentWidth/10, 
+        width = display.contentWidth-display.actualContentWidth/10,
+        font = "CP.ttf", 
+        fontSize = 35,
+        align = "center"
+    })
+    myText:setFillColor(0)
+    sceneGroup:insert(myText)
+
+    local goButton = widget.newButton({
+        label = "GO!",
+        defaultFile = "button.png",
+        labelXOffset = 0,
+        labelYOffset = 0,
+        width = display.actualContentWidth/4,
+        height = display.actualContentHeight/8,
+        fontSize = 35,
+        font = "CP.ttf",
+        labelColor = {default={1,0,0,1}, over={1,1,1,1}},
+        onEvent = handleGoButtonEvent
+    })
+
+    goButton.x = display.contentCenterX
+    goButton.y = display.contentCenterY+display.actualContentHeight/5
+    sceneGroup:insert(goButton)
+
+end
+
+function scene:show(event)
+    local sceneGroup = self.view
+end
+
+function scene:hide(event)
+    local sceneGroup = self.view
+end
+
+function scene:destroy(event)
+    local sceneGroup = self.view
+end
+
+---------------------------------------------------------------------------------
+-- END OF YOUR IMPLEMENTATION
+---------------------------------------------------------------------------------
+scene:addEventListener("create",scene)
+scene:addEventListener("show",scene)
+scene:addEventListener("hide",scene)
+scene:addEventListener("destroy",scene)
+return scene
