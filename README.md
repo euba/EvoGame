@@ -1,4 +1,4 @@
-# EvoGame
+# Hide-Warn-Mock
 A simple web game to teach the basic concept of evolution and natural selection
 
 ## What’s the goal?
