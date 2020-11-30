@@ -21,7 +21,8 @@ local function handlePBut50Event(event)
         PBut50.alpha=1
         PBut100.alpha=0.2
         PBut200.alpha=0.2
-        popsize = 50
+        --popsize = 50
+        maxgens = 3
     end
 end
 local function handlePBut100Event(event)
@@ -29,7 +30,8 @@ local function handlePBut100Event(event)
         PBut50.alpha=0.2
         PBut100.alpha=1
         PBut200.alpha=0.2
-        popsize = 100
+        --popsize = 100
+        maxgens = 5
     end
 end
 local function handlePBut200Event(event)
@@ -37,7 +39,8 @@ local function handlePBut200Event(event)
         PBut50.alpha=0.2
         PBut100.alpha=0.2
         PBut200.alpha=100
-        popsize = 200
+        --popsize = 200
+        maxgens = 7
     end
 end
 
@@ -75,6 +78,17 @@ local function handleBut75Event(event)
         freq = 0.75
     end
 end
+local function handleEnvButtonEvent(event)
+    if ("ended" == event.phase) then
+        if(changenv == false) then
+            changenv = true
+            envButton.alpha = 1
+        else
+            changenv = false
+            envButton.alpha = 0.2
+        end
+    end
+end
 
 --
 -- Start the composer event handlers
@@ -93,7 +107,7 @@ function scene:create(event)
     local psize = display.newText({
         text = langtexts[langset][8],     
         x = display.contentCenterX,
-        y = display.contentCenterY-display.actualContentHeight/10,
+        y = display.contentCenterY-display.actualContentHeight/3,
         width = display.contentWidth-20,
         font = "CP.ttf",   
         fontSize = texs,
@@ -105,10 +119,12 @@ function scene:create(event)
     --sceneGroup:insert(slidep)
     psize:setFillColor(0)
 
-    popy = display.contentCenterY+display.actualContentHeight/20
+    --popy = display.contentCenterY+display.actualContentHeight/20
+    popy = (display.contentCenterY-display.actualContentHeight/3)+display.actualContentHeight/8
+
 
     PBut50 = widget.newButton({
-        label = "50",
+        label = "4",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX-display.contentWidth*(1/6),
@@ -117,14 +133,14 @@ function scene:create(event)
         onEvent = handlePBut50Event
     })
     sceneGroup:insert(PBut50)
-    if(popsize == 50) then
+    if(maxgens == 3) then
         PBut50.alpha=1
     else
         PBut50.alpha=0.2
     end
 
     PBut100 = widget.newButton({
-        label = "100",
+        label = "6",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX,
@@ -133,14 +149,14 @@ function scene:create(event)
         onEvent = handlePBut100Event
     })
     sceneGroup:insert(PBut100)
-    if(popsize == 100) then
+    if(maxgens == 5) then
         PBut100.alpha=1
     else
         PBut100.alpha=0.2
     end
 
     PBut200 = widget.newButton({
-        label = "200",
+        label = "8",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX+display.contentWidth*(1/6),
@@ -149,10 +165,32 @@ function scene:create(event)
         onEvent = handlePBut200Event
     })
     sceneGroup:insert(PBut200)
-    if(popsize == 200) then
+    if(maxgens == 7) then
         PBut200.alpha=1
     else
         PBut200.alpha=0.2
+    end
+
+    envButton = widget.newButton({
+        label = langtexts[langset][17],
+        defaultFile = "Play_button.png",
+        labelXOffset = 0,
+        labelYOffset = 0,
+        width = display.actualContentWidth/1.8,
+        height = display.actualContentHeight/8,
+        fontSize = bots,
+        font = "CP.ttf",
+        labelColor = {default={1,1,1,1}, over={1,0,0,1}},
+        onEvent = handleEnvButtonEvent
+    })
+    envButton.x = display.contentCenterX
+    envButton.y = display.contentCenterY+display.actualContentHeight/8
+    sceneGroup:insert(envButton)
+
+    if(changenv == true) then
+        envButton.alpha=1
+    else
+        envButton.alpha=0.2
     end
 
     --[[local min = display.newText({
@@ -292,6 +330,8 @@ end
 
 function scene:destroy(event)
     local sceneGroup = self.view
+    envButton:removeSelf()
+    envButton = nil
 end
 
 ---------------------------------------------------------------------------------

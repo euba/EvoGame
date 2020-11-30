@@ -10,7 +10,7 @@ langtexts[1] = {
     'You’ve failed to get enough nutrients! Reincarnate as a new predator and start from scratch',
     'You made it!\n\nWhat happened to the prey population over generations?\nAnalyze your results considering the guidelines',
     'Results',
-    'Population size',
+    'Number of generations',
     'Phenotype frequency',
     'What is the goal?\n\nUnderstand how adaptations like camouflage, aposematism, and mimicry can establish in a population under the selective pressure of predation',
     'Tinigua Forest',
@@ -18,7 +18,8 @@ langtexts[1] = {
     'You ate too many toxic butterflies!\nReincarnate as a new predator and start from scratch',
     'Instructions',
     'Credits\n\nArtwork and design – Rebekka Janke​\nSoftware developer – Eugen Bauer​\nConcept – Laura Flórez​',
-    'This project is licensed under the terms of the MIT license.'
+    'This project is licensed under the terms of the MIT license.',
+    'Environment change'
 }
 langtexts[2] = {
     'Los!',
@@ -28,7 +29,7 @@ langtexts[2] = {
     'Du hast nicht genügend Nahrung gesichert!\nReinkarniere als ein neues Raubtier und fang von vorne an',
     'Geschafft!\n\nWas ist mit der Beutepopulation über Generationen passiert?\nAnalysiere dein Ergebnis hinsichtlich der Richtlinien',
     'Ergebnis',
-    'Populationsgröße',
+    'Anzahl an Generationen',
     'Phenotypfrequenz',
     'Was ist das Ziel?\n\nVerstehen wie sich Merkmale wie Tarnung, Aposematismus und Mimikry in einer Beutepopulation durchsetzen können',
     'Tinigua Wald',
@@ -36,7 +37,8 @@ langtexts[2] = {
     'Du hast zu viel giftige Beute gefressen!\nReinkarniere als ein neues Raubtier und fang von vorne an',
     'Anleitung',
     'Credits\n\nDesign – Rebekka Janke​\nProgrammierer – Eugen Bauer​\nKonzept – Laura Flórez​',
-    'Dieses Projekt besteht unter der MIT Lizenz.'
+    'Dieses Projekt besteht unter der MIT Lizenz.',
+    'Umweltsveränderung'
 }
 
 imgtexts = {}
@@ -57,6 +59,7 @@ imgtexts[2] = {
 tits = 35
 bots = 22
 texs = 20
+rtexs = 18
 
 langset = 1
 popsize = 200
@@ -64,12 +67,14 @@ bfit = 3
 rfac = 30
 freq = 0.5
 freqapo = 0.5
-maxgens = 4
+maxgens = 3
+changenv = false
 
 feedtime = 20
 gentime = 3
 
 curlvl = 1
+lbutton = "gameover"
 
 images = {
   "Camouflage.png",

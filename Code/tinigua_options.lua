@@ -21,7 +21,8 @@ local function handlePBut50Event(event)
         PBut50.alpha=1
         PBut100.alpha=0.2
         PBut200.alpha=0.2
-        popsize = 50
+        --popsize = 50
+        maxgens = 3
     end
 end
 local function handlePBut100Event(event)
@@ -29,7 +30,8 @@ local function handlePBut100Event(event)
         PBut50.alpha=0.2
         PBut100.alpha=1
         PBut200.alpha=0.2
-        popsize = 100
+        --popsize = 100
+        maxgens = 5
     end
 end
 local function handlePBut200Event(event)
@@ -37,7 +39,8 @@ local function handlePBut200Event(event)
         PBut50.alpha=0.2
         PBut100.alpha=0.2
         PBut200.alpha=100
-        popsize = 200
+        --popsize = 200
+        maxgens = 7
     end
 end
 
@@ -74,7 +77,7 @@ local function handleButLowEvent(event)
         ButEqual.alpha=0.3
         ButHigh.alpha=0.3
         ButLow.alpha=1
-        freqapo = 0.3
+        freqapo = 0.2
         freq = 0.5
     end
 end
@@ -110,7 +113,7 @@ function scene:create(event)
     popy = (display.contentCenterY-display.actualContentHeight/3)+display.actualContentHeight/8
 
     PBut50 = widget.newButton({
-        label = "50",
+        label = "4",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX-display.contentWidth*(1/6),
@@ -119,14 +122,14 @@ function scene:create(event)
         onEvent = handlePBut50Event
     })
     sceneGroup:insert(PBut50)
-    if(popsize == 50) then
+    if(maxgens == 3) then
         PBut50.alpha=1
     else
         PBut50.alpha=0.2
     end
 
     PBut100 = widget.newButton({
-        label = "100",
+        label = "6",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX,
@@ -135,14 +138,14 @@ function scene:create(event)
         onEvent = handlePBut100Event
     })
     sceneGroup:insert(PBut100)
-    if(popsize == 100) then
+    if(maxgens == 5) then
         PBut100.alpha=1
     else
         PBut100.alpha=0.2
     end
 
     PBut200 = widget.newButton({
-        label = "200",
+        label = "8",
         shape="circle",
         radius = display.contentWidth*(1/20),
         x = display.contentCenterX+display.contentWidth*(1/6),
@@ -151,7 +154,7 @@ function scene:create(event)
         onEvent = handlePBut200Event
     })
     sceneGroup:insert(PBut200)
-    if(popsize == 200) then
+    if(maxgens == 7) then
         PBut200.alpha=1
     else
         PBut200.alpha=0.2

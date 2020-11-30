@@ -95,13 +95,23 @@ function scene:create(event)
 	local sceneGroup = self.view
     myInds = {}
 
-    local mbgImage = {type="image", filename="Background_brighter.png"} 
-    local mbackground = display.newRect(0,0,display.actualContentWidth,display.actualContentHeight)
-    mbackground.x = display.contentCenterX
-    mbackground.y = display.contentCenterY
-    mbackground.fill = mbgImage
-    sceneGroup:insert(mbackground)
-    mbackground:toBack()
+    if(curlvl == 1 and changenv == true and #gens>(maxgens/2+1)) then
+        local mbgImage = {type="image", filename="Background_brown_green_2.png"} 
+        local mbackground = display.newRect(0,0,display.actualContentWidth,display.actualContentHeight)
+        mbackground.x = display.contentCenterX
+        mbackground.y = display.contentCenterY
+        mbackground.fill = mbgImage
+        sceneGroup:insert(mbackground)
+        mbackground:toBack()
+    else
+        local mbgImage = {type="image", filename="Background_brighter.png"} 
+        local mbackground = display.newRect(0,0,display.actualContentWidth,display.actualContentHeight)
+        mbackground.x = display.contentCenterX
+        mbackground.y = display.contentCenterY
+        mbackground.fill = mbgImage
+        sceneGroup:insert(mbackground)
+        mbackground:toBack()
+    end
 
     badbg = display.newRect(display.contentCenterX,display.contentCenterY,
         display.actualContentWidth,display.actualContentHeight)
@@ -151,7 +161,8 @@ function scene:create(event)
     for i=1,abob do
         table.insert(pop,4)
     end
-    for i=#pop,gridr*gridc do
+    --print(#pop)
+    for i=(#pop+1),gridr*gridc do
         table.insert(pop,5)
     end
     --math.randomseed(os.time())
@@ -170,18 +181,22 @@ function scene:create(event)
     xstart = display.contentCenterX-(((gridr+1)*boxsize)*0.5)
     ystart = display.contentCenterY-((gridc*boxsize)*0.45)
 
+    pi = 1
     for i = 1,gridr do
         for j = 1,gridc do
-            poptype = pop[i*j]
+            poptype = pop[pi]
             if(poptype~=5) then
                 local rposx = math.random(-boxsize/2,boxsize/2)
                 local rposy = math.random(-boxsize/2,boxsize/2)
                 obj = addElement(poptype,i+j,xstart+i*boxsize+rposx,ystart+j*boxsize+rposy,boxsize)
                 table.insert(elements,obj)
             end
+            pi=pi+1
             --if(poptype == 1) then
         end
     end
+
+    --print(#elements)
 
     secondsLeft = feedtime
     local clockText = display.newText({
@@ -274,22 +289,24 @@ function scene:destroy(event)
         elements[i]:removeSelf()
         elements[i]=nil
     end
+    --apocount = math.ceil(apocount-(apocount/10))
     local endpop = camcount+mimcount+apocount
     --print("Population:",endpop)
     --print("Camouflage:",camcount)
     --print("Normal:",mimcount)
     --print("Toxic:",apocount)
-    abcam = math.round((camcount/endpop)*popsize)
     if(curlvl == 1) then
+        abcam = math.round((camcount/endpop)*popsize)
         abmim = popsize-abcam
-    else
-        abmim = math.round((mimcount/endpop)*popsize)
-    end
-    if(curlvl == 1) then
         abapo = 0
     else
+        local bonus = math.floor(apocount*0.07)
+        print(bonus)
+        abcam = math.round((camcount/endpop)*popsize) + math.ceil(bonus/2)
+        abmim = math.round((mimcount/endpop)*popsize) + (bonus-math.ceil(bonus/2))
         abapo = popsize-(abcam+abmim)
     end
+
     gens[#gens+1] = {abcam,abmim,abapo}
     for k, v in pairs(myTimers) do
         timer.cancel(v)

@@ -19,7 +19,7 @@ end
 local function handleBackButtonEvent(event)
     if ("ended" == event.phase) then
         composer.removeScene("result",false)
-        composer.gotoScene("win", {effect = "crossFade", time = 500})
+        composer.gotoScene(lbutton, {effect = "crossFade", time = 500})
     end
 end
 
@@ -33,7 +33,7 @@ function scene:create(event)
     cam.strokeWidth = 0
     cam:setStrokeColor(0,0,0)
     cam.x = display.contentCenterX-display.contentWidth*(1/5)
-    cam.y = display.contentCenterY-display.contentHeight*0.35
+    cam.y = display.contentCenterY-display.contentHeight*0.37
     cam:scale(0.2,0.2)
     sceneGroup:insert(cam)
 
@@ -41,7 +41,7 @@ function scene:create(event)
     mim.strokeWidth = 0
     mim:setStrokeColor(0,0,0)
     mim.x = display.contentCenterX
-    mim.y = display.contentCenterY-display.contentHeight*0.35
+    mim.y = display.contentCenterY-display.contentHeight*0.37
     mim:scale(0.2,0.2)
     sceneGroup:insert(mim)
 
@@ -49,9 +49,9 @@ function scene:create(event)
         local tnum = display.newText({
             text = "t"..(i-1)..":", 
             x = display.contentCenterX-display.contentWidth*(1/3), 
-            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.12*i, 
+            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.08*i, 
             font = "CP.ttf", 
-            fontSize = texs,
+            fontSize = rtexs,
             align = "center"
         })
         tnum:setFillColor(0)
@@ -60,9 +60,9 @@ function scene:create(event)
         local camnum = display.newText({
             text = gens[i][1], 
             x = display.contentCenterX-display.contentWidth*(1/5), 
-            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.12*i, 
+            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.08*i, 
             font = "CP.ttf", 
-            fontSize = texs,
+            fontSize = rtexs,
             align = "center"
         })
         camnum:setFillColor(0)
@@ -71,9 +71,9 @@ function scene:create(event)
         local mimnum = display.newText({
             text = gens[i][2], 
             x = display.contentCenterX, 
-            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.12*i, 
+            y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.08*i, 
             font = "CP.ttf", 
-            fontSize = texs,
+            fontSize = rtexs,
             align = "center"
         })
         mimnum:setFillColor(0)
@@ -101,7 +101,7 @@ function scene:create(event)
         apo.strokeWidth = 0
         apo:setStrokeColor(0,0,0)
         apo.x = display.contentCenterX+display.contentWidth*(1/5)
-        apo.y = display.contentCenterY-display.contentHeight*0.35
+        apo.y = display.contentCenterY-display.contentHeight*0.37
         apo:scale(0.2,0.2)
         sceneGroup:insert(apo)
 
@@ -109,9 +109,9 @@ function scene:create(event)
             local aponum = display.newText({
                 text = gens[i][3], 
                 x = display.contentCenterX+display.contentWidth*(1/5), 
-                y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.12*i, 
+                y = (display.contentCenterY-display.contentHeight*0.35)+display.contentHeight*0.08*i, 
                 font = "CP.ttf", 
-                fontSize = texs,
+                fontSize = rtexs,
                 align = "center"
             })
             aponum:setFillColor(0)

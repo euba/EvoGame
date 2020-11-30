@@ -10,6 +10,7 @@ local function handleHomeButtonEvent(event)
 end
 local function handleResultButtonEvent(event)
     if ("ended" == event.phase) then
+        lbutton = "win"
         composer.removeScene("win",false)
         composer.gotoScene("result", {effect = "crossFade", time = 500})
     end

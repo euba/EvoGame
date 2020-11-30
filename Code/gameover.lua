@@ -8,6 +8,13 @@ local function handleHomeButtonEvent(event)
         composer.gotoScene("menu", {effect = "crossFade", time = 500})
     end
 end
+local function handleResultButtonEvent(event)
+    if ("ended" == event.phase) then
+        lbutton = "gameover"
+        composer.removeScene("gameover",false)
+        composer.gotoScene("result", {effect = "crossFade", time = 500})
+    end
+end
 
 --
 -- Start the composer event handlers
@@ -35,6 +42,22 @@ function scene:create(event)
     })
     myText:setFillColor( 1, 0, 0.5 )
     sceneGroup:insert(myText)
+
+    local resultButton = widget.newButton({
+        label = langtexts[langset][7],
+        defaultFile = "Play_button.png",
+        labelXOffset = 0,
+        labelYOffset = 0,
+        width = display.actualContentWidth/4,
+        height = display.actualContentHeight/8,
+        fontSize = bots,
+        font = "CP.ttf",
+        labelColor = {default={1,1,1,1}, over={1,0,0,1}},
+        onEvent = handleResultButtonEvent
+    })
+    resultButton.x = display.contentCenterX
+    resultButton.y = display.contentCenterY+display.actualContentHeight/4
+    sceneGroup:insert(resultButton)
 
     local homeButton = widget.newButton({
         defaultFile = "Home.png",
